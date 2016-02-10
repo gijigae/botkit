@@ -157,6 +157,382 @@ controller.hears(['shutdown'],'direct_message,direct_mention,mention',function(b
     });
 });
 
+controller.hears(['part5'],'direct_message,direct_mention,mention',function(bot, message) {
+
+    bot.startConversation(message,function(err, convo) {
+        convo.ask('*Q1.* Provided the TOEICkers respond to the new service ______, ' +
+            'ETS will probably allow it to continue.\n\n ' +
+            '(A) favorite \n' +
+            '(B) favorable\n' +
+            '(C) favor\n' +
+            '(D) favorably',[
+            {
+                pattern: "A",
+                callback: function(response, convo) {
+                    convo.say('Yes, answer is ' + response.text);
+                    convo.next();
+                    setTimeout(function() {
+                        process.exit();
+                    },3000);
+                }
+            },
+            {
+                pattern: "D",
+                default: true,
+                callback: function(response, convo) {
+                    convo.say('Very good. Yes, ' + response.text + " is the correct answer.");
+                    convo.next();
+                }
+            }
+        ]);
+    });
+});
+
+//
+//controller.hears(['hello','hi'],'direct_message,direct_mention,mention',function(bot, message) {
+//
+//    bot.api.reactions.add({
+//        timestamp: message.ts,
+//        channel: message.channel,
+//        name: 'robot_face',
+//    },function(err, res) {
+//        if (err) {
+//            bot.botkit.log('Failed to add emoji reaction :(',err);
+//        }
+//    });
+//
+//
+//    controller.storage.users.get(message.user,function(err, user) {
+//        if (user && user.name) {
+//            bot.reply(message,'Hello ' + user.name + '!!');
+//        } else {
+//            bot.reply(message,'Hello.');
+//        }
+//    });
+//});
+
+controller.hears(['part5-2'], 'direct_message, direct_mention, mention', function(bot, message){
+
+    controller.storage.users.get(message.user, function(err, user){
+        if (user){
+            bot.reply(message, {
+                text:"Q1. Provided the TOEICkers respond to the new service ______, " +
+                    "ETS will probably allow it to continue.\n",
+                attachments:[
+                    {
+                        text:"\n(A) favorite \n(B) favorable\n(C) favor\n(D) favorably"
+                    }
+
+                ],
+            });
+        }else{
+            bot.reply(message, 'I don\'t know yet!')
+        }
+    });
+
+});
+
+controller.hears(['part6'], 'direct_message, direct_mention, mention', function(bot, message){
+
+    controller.storage.users.get(message.user, function(err, user){
+        if (user){
+            bot.reply(message, {
+                "text": "LONDON, 2 November - Dixon Dairy Prodcts Ltd. announced today that it will sepnd nearly " +
+                    "£1.5 million to improve the then inspection rooms at its facility in Slough. The company will " +
+                    "install new storage tanks and state-of-the-art equipment to regulate temperature. " +
+                    "The ------- is expected ",
+                "username": "Part6",
+                "attachments": [
+                    {
+                        //"fallback": "Required plain-text summary of the attachment.",
+                        //
+                        //"color": "#36a64f",
+
+                        "pretext": "150.",
+
+                        //"author_name": "Test",
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+                        //
+                        //"title": "Slack API Documentation",
+                        //"title_link": "https://api.slack.com/",
+
+                        text:"(A) relocation \n" +
+                        "(B) upgrade\n" +
+                        "(C) transfer\n" +
+                        "(D) merger"
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //],
+                        //
+                        //"image_url": "https://s3-ap-southeast-1.amazonaws.com/gijigae/toeic-part7.jpg"
+                        //"thumb_url": "http://lorempixel.com/48/48"
+                    }
+                ],
+                "icon_url": "http://lorempixel.com/48/48"
+            });
+            bot.reply(message, {
+                "text": "to increase the company's dairy production by at least 20 percent over the next three years.\n\n " +
+                "The plans are motivated by increased demand for Dixon products in several markets. In addition to " +
+                "the Slough facility. Dixon has a smaller production plant in Cardiff, Wales, where a similar project " +
+                "commenced early last year. The work at Cardiff ------- within seven months.",
+                "username": "Part6",
+                "attachments": [
+                    {
+                        //"fallback": "Required plain-text summary of the attachment.",
+                        //
+                        //"color": "#36a64f",
+
+                        "pretext": "151.",
+
+                        //"author_name": "Test",
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+                        //
+                        //"title": "Slack API Documentation",
+                        //"title_link": "https://api.slack.com/",
+
+                        text:"(A) has been completed \n" +
+                        "(B) will be completed\n" +
+                        "(C) was completed\n" +
+                        "(D) will have been completed"
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //],
+                        //
+                        //"image_url": "http://www.planwallpaper.com/static/images/wallpapers-hd-8000-8331-hd-wallpapers.jpg",
+                        //"thumb_url": "http://lorempixel.com/48/48"
+                    }
+                ],
+                "icon_url": "http://lorempixel.com/48/48"
+            });
+            bot.reply(message, {
+                "text": "Since then, the company's dairy production has risen by roughly 4 percent.\n\n " +
+                "Dixon is regarded as the premier producer of cheese and yogurt in the region and has enjoyed " +
+                "considerable sales in recent years. Last year the company's cheese sales ------- exceeded £40 " +
+                "million.",
+                "username": "Part6",
+                "attachments": [
+                    {
+                        //"fallback": "Required plain-text summary of the attachment.",
+                        //
+                        //"color": "#36a64f",
+
+                        "pretext": "152.",
+
+                        //"author_name": "Test",
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+                        //
+                        //"title": "Slack API Documentation",
+                        //"title_link": "https://api.slack.com/",
+
+                        text:"(A) alone \n" +
+                        "(B) apart\n" +
+                        "(C) above\n" +
+                        "(D) around"
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //],
+                        //
+                        //"image_url": "http://www.planwallpaper.com/static/images/wallpapers-hd-8000-8331-hd-wallpapers.jpg",
+                        //"thumb_url": "http://lorempixel.com/48/48"
+                    }
+                ],
+                "icon_url": "http://lorempixel.com/48/48"
+            });
+        }else{
+            bot.reply(message, 'I don\'t know yet!')
+        }
+    });
+
+});
+
+controller.hears(['part7 sp'], 'direct_message, direct_mention, mention', function(bot, message){
+
+    controller.storage.users.get(message.user, function(err, user){
+        if (user){
+            bot.reply(message, {
+                "text": "*Questions 157 - 159* refer to teh following billing statement.",
+                "username": "Part7 SP",
+                "attachments": [
+                    {
+                        "fallback": "Billing statement for the questions 157 - 159.",
+
+                        "color": "#36a64f",
+
+                        //"pretext": "Desparte Systems",
+                        //
+                        //"author_name": "Test",
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+                        //
+                        //"title": "Billing Statement",
+                        //"title_link": "https://s3-ap-southeast-1.amazonaws.com/gijigae/toeic-part7.jpg",
+
+                        text:"Billing Statement" ,
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //],
+                        //
+                        "image_url": "https://s3-ap-southeast-1.amazonaws.com/gijigae/toeic-part7-v3.jpg"
+                        //"thumb_url": "http://lorempixel.com/48/48"
+                    }
+                ],
+                "icon_url": "http://lorempixel.com/48/48"
+            });
+            bot.reply(message, {
+                "text": "For what service was the bill issued?",
+                "username": "Part7 SP",
+                "attachments": [
+                    {
+                        //"fallback": "Required plain-text summary of the attachment.",
+                        //
+                        //"color": "#36a64f",
+
+                        "pretext": "152.",
+
+                        //"author_name": "Test",
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+                        //
+                        //"title": "Slack API Documentation",
+                        //"title_link": "https://api.slack.com/",
+
+                        text:"(A) Property maintenance \n" +
+                        "(B) Electricity\n" +
+                        "(C) Heating oil\n" +
+                        "(D) Water"
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //],
+                        //
+                        //"image_url": "http://www.planwallpaper.com/static/images/wallpapers-hd-8000-8331-hd-wallpapers.jpg",
+                        //"thumb_url": "http://lorempixel.com/48/48"
+                    }
+                ],
+                "icon_url": "http://lorempixel.com/48/48"
+            });
+        }else{
+            bot.reply(message, 'I don\'t know yet!')
+        }
+    });
+
+});
+
+controller.hears(['part7 dp'], 'direct_message, direct_mention, mention', function(bot, message){
+
+    controller.storage.users.get(message.user, function(err, user){
+        if (user){
+            bot.reply(message, {
+                "text": "*Desparte Systems to Open New Data Centers*\n" +
+                    "by Cheryl Wittenauer\n\n" +
+                    "MONTREAL - Desparte Systems, a diversified manufacturing and " +
+                    "distributing company, has announced plans to build a " +
+                    "2,800-square-meter data center in Montreal as part of its " +
+                    "effort to reorganize its global business operations. " +
+                    "In addition, other data centers will be built in Dallas, " +
+                    "Brussels, and Bangalore. Currently, Desparte's two largest " +
+                    "data centers are in London and Chicago, in facilities owned by " +
+                    "other companies. Desparte plans to close smaller centers in Seattle and Mumbai.\n\n" +
+                    "Desparte vice president for operations Elena Fontaine said the changes will enhance " +
+                    "business efficiency and improve productivity. She stressed that Desparte personnel "+
+                    "will face minimal job loss as a result of the changes because the data centers, " +
+                    "which are essentially large rooms employ relatively few people. Fontaine said " +
+                    "that the new centers will be more secure and also more energy-efficient. The " +
+                    "transition is expected to take place over the next two years.\n\n" +
+                    "The new Montreal site will serve as the central location for the company's " +
+                    "operations. The Montreal and Dallas centers will be built first at a combined " +
+                    "cost of approximately C$35 million. The company will lease a facility in Montreal " +
+                    "next year while construction of the permanent center takes place.\n\n" +
+                    "-------------------------------------------------------\n\n" +
+                    "*Desparte Systems*\n\n" +
+                    "December 2\n\n" +
+                    "Simon Stevens, Editor\n" +
+                    "_Global Business Magazine_\n" +
+                    "1500 Weston Ave." +
+                    "Dallas, TX 75208\n\n" +
+                    "Dear Mr. Stevens:\n\n" +
+                    "I am writing in regard to Cheryl Wittenauer's article on Desparte Systems in the " +
+                    "November 30 issue of _Global Business Magazine_. While I appreciate the coverage we " +
+                    "received by your magazine, I want to call your attention to a few inaccuracies. First, " +
+                    "we will only be closing one of our active data centers. The Mumbai center will remain open " +
+                    "and will focus on running quality-control checks. Second, the centers in Montreal and " +
+                    "Bangalore will be built first; the site in Dallas has not yet been officially scheduled " +
+                    "for construction.\n\n" +
+                    "I would appreciate it if you would print these corrections in an upcoming issue of your " +
+                    "magazine. If you have any questions, please call me directly at 450-555-0054.\n\n" +
+                    "Sincerely,\n\n" +
+                    "Martin Gervais, Directory of Public Relations\n" +
+                    "Desparte Systems\n\n" +
+                    "-------------------------------------------------------\n\n" +
+                    "001. What does the article imply about Desparte Systems?\n",
+                "username": "Part7",
+                "attachments": [
+                    {
+                        //"fallback": "Required plain-text summary of the attachment.",
+                        //
+                        //"color": "#36a64f",
+                        //
+                        //"pretext": "Desparte Systems",
+                        //
+                        //"author_name": "Test",
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+                        //
+                        //"title": "Slack API Documentation",
+                        //"title_link": "https://api.slack.com/",
+
+                        text:"(A) It plans to borrow money. \n" +
+                            "(B) It will retain most of its employees.\n" +
+                            "(C) It is reorganizing its marketing department.\n" +
+                            "(D) It will merge with another company."
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //],
+                        //
+                        //"image_url": "http://lorempixel.com/48/48",
+                        //"thumb_url": "http://lorempixel.com/48/48"
+                    }
+                ],
+                "icon_url": "http://lorempixel.com/48/48"
+            });
+        }else{
+            bot.reply(message, 'I don\'t know yet!')
+        }
+    });
+
+});
 
 controller.hears(['uptime','identify yourself','who are you','what is your name'],'direct_message,direct_mention,mention',function(bot, message) {
 
