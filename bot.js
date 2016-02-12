@@ -103,6 +103,46 @@ controller.hears(['hello','hi'],'direct_message,direct_mention,mention',function
     });
 });
 
+controller.hears(['what is accommodate?'], 'direct_message, direct_mention, mention', function(bot, message){
+    controller.storage.users.get(message.user, function(err, user){
+        if (user){
+            bot.reply(message, {
+                text:"If a building or space can *accommodate* someone or something, it has enough room for them.\n",
+                attachments:[
+                    {
+                        "fallback": "Required plain-text summary of the attachment.",
+
+                        "color": "#36a64f",
+
+                        //"pretext": "",
+
+                        //"author_name": "The school was not big enough to accommodate all the children.\n"
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+
+                        //"title": "Slack API Documentation",
+                        //"title_link": "https://api.slack.com/",
+
+                        text:"The school was not big enough to accommodate all the children.\n"
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //]
+                    }
+
+                ],
+            });
+        }else{
+            bot.reply(message, 'I don\'t know yet!')
+        }
+    });
+
+});
+
 controller.hears(['call me (.*)'],'direct_message,direct_mention,mention',function(bot, message) {
     var matches = message.text.match(/call me (.*)/i);
     var name = matches[1];
@@ -171,9 +211,9 @@ controller.hears(['part5'],'direct_message,direct_mention,mention',function(bot,
                 callback: function(response, convo) {
                     convo.say('Yes, answer is ' + response.text);
                     convo.next();
-                    setTimeout(function() {
-                        process.exit();
-                    },3000);
+                    //setTimeout(function() {
+                    //    process.exit();
+                    //},3000);
                 }
             },
             {

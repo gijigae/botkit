@@ -60,16 +60,12 @@ if (!process.env.token) {
 }
 
 var controller = Botkit.slackbot({
- debug: false
+    debug: true
 });
 
 controller.spawn({
-  token: process.env.token
-}).startRTM(function(err) {
-  if (err) {
-    throw new Error(err);
-  }
-});
+    token: process.env.token
+}).startRTM();
 
 controller.hears(['pizzatime'],['ambient'],function(bot,message) {
   bot.startConversation(message, askFlavor);
