@@ -143,6 +143,48 @@ controller.hears(['what is accommodate?'], 'direct_message, direct_mention, ment
 
 });
 
+controller.hears(['what is accomplish?'], 'direct_message, direct_mention, mention', function(bot, message){
+    controller.storage.users.get(message.user, function(err, user){
+        if (user){
+            bot.reply(message, {
+                text:"If you *accomplish* something, you succeed in doing it.\n\n",
+                attachments:[
+                    {
+                        "fallback": "If we'd all work together, I think we could accomplish our goal.",
+
+                        "color": "#36a64f",
+
+                        //"pretext": "",
+
+                        //"author_name": "The school was not big enough to accommodate all the children.\n"
+                        //"author_link": "http://flickr.com/bobby/",
+                        //"author_icon": "http://flickr.com/icons/bobby.jpg",
+
+                        //"title": "Slack API Documentation",
+                        //"title_link": "https://api.slack.com/",
+
+                        text:"If we'd all work together, I think we could accomplish our goal.\n",
+
+                        //"fields": [
+                        //    {
+                        //        "title": "Test",
+                        //        "value": "High",
+                        //        "short": false
+                        //    }
+                        //]
+                        "image_url": "https://s3-ap-southeast-1.amazonaws.com/gijigae/accomplish.jpg"
+                        //"thumb_url": "http://lorempixel.com/48/48"
+                    }
+
+                ],
+            });
+        }else{
+            bot.reply(message, 'I don\'t know yet!')
+        }
+    });
+
+});
+
 controller.hears(['call me (.*)'],'direct_message,direct_mention,mention',function(bot, message) {
     var matches = message.text.match(/call me (.*)/i);
     var name = matches[1];
