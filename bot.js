@@ -159,6 +159,80 @@ controller.hears(['call me (.*)'],'direct_message,direct_mention,mention',functi
     });
 });
 
+controller.hears(['thank you'],'direct_message,direct_mention,mention',function(bot, message) {
+    //var matches = message.text.match(/call me (.*)/i);
+    //var name = matches[1];
+    controller.storage.users.get(message.user,function(err, user) {
+        if (!user) {
+            user = {
+                id: message.user,
+            };
+        }
+        //user.name = name;
+        controller.storage.users.save(user,function(err, id) {
+            bot.reply(message,'Don\'t mention it.');
+        });
+    });
+});
+
+controller.hears(['ok'],'direct_message,direct_mention,mention',function(bot, message) {
+    //var matches = message.text.match(/call me (.*)/i);
+    //var name = matches[1];
+    controller.storage.users.get(message.user,function(err, user) {
+        if (!user) {
+            user = {
+                id: message.user,
+            };
+        }
+        //user.name = name;
+        controller.storage.users.save(user,function(err, id) {
+            bot.reply(message,'Sorry about that');
+        });
+    });
+});
+
+controller.hears(['that is fine'],'direct_message,direct_mention,mention',function(bot, message) {
+    //var matches = message.text.match(/call me (.*)/i);
+    //var name = matches[1];
+    bot.api.reactions.add({
+        timestamp: message.ts,
+        channel: message.channel,
+        name: 'thumbsup',
+    },function(err, res) {
+        if (err) {
+            bot.botkit.log('Failed to add emoji reaction :(',err);
+        }
+    });
+    controller.storage.users.get(message.user,function(err, user) {
+        if (!user) {
+            user = {
+                id: message.user,
+            };
+        }
+        //user.name = name;
+        controller.storage.users.save(user,function(err, id) {
+            bot.reply(message,'thank you for your understanding!');
+        });
+    });
+});
+
+controller.hears(['can you tweet it for me?'],'direct_message,direct_mention,mention',function(bot, message) {
+    //var matches = message.text.match(/call me (.*)/i);
+    //var name = matches[1];
+
+    controller.storage.users.get(message.user,function(err, user) {
+        if (!user) {
+            user = {
+                id: message.user,
+            };
+        }
+        //user.name = name;
+        controller.storage.users.save(user,function(err, id) {
+            bot.reply(message,'I haven\'t learned how to tweet yet');
+        });
+    });
+});
+
 controller.hears(['what is my name','who am i'],'direct_message,direct_mention,mention',function(bot, message) {
 
     controller.storage.users.get(message.user,function(err, user) {
@@ -178,7 +252,16 @@ controller.hears(['shutdown'],'direct_message,direct_mention,mention',function(b
             {
                 pattern: bot.utterances.yes,
                 callback: function(response, convo) {
-                    convo.say('Bye!');
+                    convo.say(message, {
+                        text:"Q1. Provided the TOEICkers respond to the new service ______, " +
+                        "ETS will probably allow it to continue.\n",
+                        attachments:[
+                            {
+                                text:"\n(A) favorite \n(B) favorable\n(C) favor\n(D) favorably"
+                            }
+
+                        ]
+                    });
                     convo.next();
                     setTimeout(function() {
                         process.exit();
